@@ -23,6 +23,7 @@ services:
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
     ports:
       - "5000:5000"
+      - "5044:5044"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
@@ -42,7 +43,18 @@ services:
     depends_on:
       - elasticsearch
 
-networks:
+  filebeat:
+    build:
+      context: filebeat/
+    user: root
+    volumes:
+      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - /var/log:/target/logs:ro
+    networks:
+      - elk
+    depends_on:
+      - logstash
 
+networks:
   elk:
     driver: bridge
