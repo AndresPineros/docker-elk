@@ -50,6 +50,9 @@ services:
       ELASTICSEARCH_URL: http://elasticsearch:9200
       ELASTICSEARCH_USERNAME: elastic
       ELASTICSEARCH_PASSWORD: elastic_pass
+      XPACK_MONITORING_ENABLED: "true"
+      XPACK_MONITORING_ELASTICSEARCH_USERNAME: elastic
+      XPACK_MONITORING_ELASTICSEARCH_PASSWORD: elastic_pass
     networks:
       - elk
     depends_on:

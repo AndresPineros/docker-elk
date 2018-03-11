@@ -2,6 +2,7 @@
 FROM docker.elastic.co/kibana/kibana-oss:6.2.2
 
 RUN kibana-plugin install https://github.com/sivasamyk/logtrail/releases/download/v0.1.26/logtrail-6.2.2-0.1.26.zip
+RUN kibana-plugin install x-pack
 
 ENV ES_HOST elasticsearch
 ENV ES_PORT 9200
