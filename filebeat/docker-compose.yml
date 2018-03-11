@@ -3,15 +3,10 @@ version: '3.3'
 services:
   filebeat:
     build:
-      context: filebeat/
+      context: .
     user: root
     environment:
-      LOGSTASH_HOST: ${LOGSTASH_HOST}
-      LOGSTASH_PORT: 5044
+      LOGSTASH_URL: ${DOCKER_LOCALHOST}:5044
     volumes:
-      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./config/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - /var/log:/target/logs:ro
-    networks:
-      - elk
-    depends_on:
-      - logstash

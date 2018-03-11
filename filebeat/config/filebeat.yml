@@ -4,4 +4,4 @@ filebeat.prospectors:
     - /target/logs/*.log
 
 output.logstash:
-  hosts: ["${LOGSTASH_HOST:logstash}:${LOGSTASH_PORT:5044}"]
+  hosts: ["${LOGSTASH_URL}"]
