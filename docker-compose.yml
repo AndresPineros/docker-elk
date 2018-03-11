@@ -26,6 +26,7 @@ services:
       - "5044:5044"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTICSEARCH_URL: elasticsearch:9200
     networks:
       - elk
     depends_on:
@@ -38,22 +39,12 @@ services:
       - ./kibana/config/:/usr/share/kibana/config:ro
     ports:
       - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
     networks:
       - elk
     depends_on:
       - elasticsearch
-
-  filebeat:
-    build:
-      context: filebeat/
-    user: root
-    volumes:
-      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
-      - /var/log:/target/logs:ro
-    networks:
-      - elk
-    depends_on:
-      - logstash
 
 networks:
   elk:
