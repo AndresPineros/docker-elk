@@ -7,6 +7,8 @@ services:
     user: root
     environment:
       LOGSTASH_URL: ${DOCKER_LOCALHOST}:5044
+      FILEBEAT_USER: elastic
+      FILEBEAT_PASSWORD: elastic_pass
     volumes:
       - ./config/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - /var/log:/target/logs:ro
